@@ -5,13 +5,18 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { Card, Checkbox, Label ,Icon} from 'semantic-ui-react' 
 
+const dataSet = { 
+  successful: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387],
+  failed: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434],
+  // total:[43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
+}
+
 function App() {
 
-  const [data, setData] = useState({ 
-      total:[43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
-      successful: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387],
-      failed: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434],
-    })
+  const totalSessions = dataSet.successful.map((a, i)=> (a + dataSet.failed[i]))
+  
+  const [data, setData] = useState({ ...dataSet, total: totalSessions })
+
   const [total, setTotal] = useState(true)
   const [successful, setSuccessful] = useState(true)
   const [failed, setFailed] = useState(true)
